@@ -414,6 +414,24 @@ body[data-v="pattern-intelligence"]{--mark-bg:var(--night);--mark-ink:var(--nigh
 }
 @media (prefers-reduced-motion:reduce){.reel{overflow-x:auto}.reel-track{animation:none}}
 
+/* ABOUT proposal */
+.ab-open{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:56px;align-items:end}
+.ab-open img{aspect-ratio:3/4}
+.ab-txt{display:flex;flex-direction:column;gap:40px;padding-bottom:40px}
+.ab-lead{font-family:var(--display);font-size:clamp(24px,2.5vw,38px);line-height:1.2;margin:0;max-width:30ch}
+.ab-spec{display:grid;grid-template-columns:90px minmax(0,1fr);gap:8px 16px;margin:0;border-top:1px solid var(--ink);padding-top:12px}
+.ab-spec dt{color:var(--red)}.ab-spec dd{margin:0}
+.about figure{margin:0}
+.about img{width:100%;height:auto;object-fit:cover;display:block}
+.about figcaption{display:flex;gap:12px;padding:10px 0 0;color:var(--ink-2)}
+.about figcaption span{color:var(--red)}
+.ab-hero img{aspect-ratio:16/9;object-position:center bottom}
+.about .ab-pano{margin-top:40px}.ab-pano img{aspect-ratio:2.2/1}
+.ab-row{display:grid;gap:16px;margin-top:40px}
+.ab-row.three{grid-template-columns:repeat(3,minmax(0,1fr))}.ab-row.three img{aspect-ratio:3/4}
+.ab-row.two{grid-template-columns:repeat(2,minmax(0,1fr));padding-bottom:120px}.ab-row.two img{aspect-ratio:4/5}
+@media (max-width:900px){.ab-open,.ab-row.three,.ab-row.two{grid-template-columns:minmax(0,1fr)}.ab-hero img{aspect-ratio:4/3}}
+
 </style>
 </head><body>
 
@@ -431,6 +449,7 @@ body[data-v="pattern-intelligence"]{--mark-bg:var(--night);--mark-ink:var(--nigh
     <a href="#emmeline"><small>P.05</small>Emmeline</a>
     <a href="#age-revolution"><small>P.06</small>Age Revolution</a>
     <a href="#pattern-intelligence"><small>P.07</small>Pattern Intelligence</a>
+    <a href="#about"><small>—</small>About</a>
     <a href="#contact"><small>—</small>Contact</a>
   </nav>
 </aside>
@@ -752,6 +771,27 @@ body[data-v="pattern-intelligence"]{--mark-bg:var(--night);--mark-ink:var(--nigh
   </div>
 
   <blockquote class="pad pi-quote"><p>“AI should not replace pattern makers. It should remove repetitive work so they can spend more time <em>making decisions.</em>”</p></blockquote>
+</section>
+
+<section class="view about" data-view="about" hidden>
+  <div class="pad head" data-code="About · Off the clock"><h1>Outside</h1><p>Kitesurf · Surf · Mountains · Travel</p></div>
+  <div class="pad ab-open">
+    <figure><img src="o/surf.jpg" alt="Helena walking on the beach with a surfboard"><figcaption class="mono"><span>F.01</span>Surf</figcaption></figure>
+    <div class="ab-txt">
+      <p class="ab-lead">Most of my free time happens outdoors. Wind, salt, cold and constant movement are where I see what a garment really has to do, and that is the kind of clothing I want to build.</p>
+      <dl class="ab-spec mono"><dt>Water</dt><dd>Kitesurf, surf, kayak</dd><dt>Land</dt><dd>Mountains</dd><dt>Always</dt><dd>Travelling</dd></dl>
+    </div>
+  </div>
+  <div class="pad ab-row three">
+    <figure><img src="o/kite-air.jpg" alt="Helena kitesurfing in the air under an orange kite" style="aspect-ratio:3/4;object-position:58% bottom"><figcaption class="mono"><span>F.02</span>Kitesurf · airborne</figcaption></figure>
+    <figure><img src="o/kite-shore.jpg" alt="Helena riding a kiteboard along the shore"><figcaption class="mono"><span>F.03</span>Kitesurf</figcaption></figure>
+    <figure><img src="o/kayak.jpg" alt="Helena in a kayak on clear water"><figcaption class="mono"><span>F.04</span>Kayak</figcaption></figure>
+  </div>
+  <figure class="pad ab-pano"><img src="o/kite-sea.jpg" alt="Kitesurfing on the open sea"><figcaption class="mono"><span>F.05</span>Kitesurf · open sea</figcaption></figure>
+  <div class="pad ab-row two">
+    <figure><img src="o/kites-beach.jpg" alt="Kites resting on the beach"><figcaption class="mono"><span>F.06</span>Gear on the sand</figcaption></figure>
+    <figure><img src="o/kite-jump.jpg" alt="A kitesurf jump over the sea"><figcaption class="mono"><span>F.07</span>Kitesurf · jump</figcaption></figure>
+  </div>
 </section>
 
 <section class="view" data-view="contact" hidden>
