@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Helena Cáceres. Design Developer, pattern maker and fashion designer.">
+<meta name="robots" content="noindex">
+<title>Helena Cáceres Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Anton&display=swap">
+<style>
+/* Layout: a fixed name index on the left, and each collection opening as its own world across the rest of the screen. */
+:root{
+  --bg:#ffffff; --ink:#121212; --ink-2:#7b7b7b; --rule:#e7e7e7; --tile:#f2f2f2;
+  --cream:#efe7da; --sepia:#5b4a3a; --sepia-2:#8c7764;
+  --yellow:#ffe500; --black:#0b0b0b;
+  --sans:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --serif:"Cormorant Garamond","Garamond","Times New Roman",serif;
+  --poster:"Anton","Impact","Arial Narrow",sans-serif;
+  --side:210px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0f0f0f;--ink:#ececec;--ink-2:#8d8d8d;--rule:#262626;--tile:#1b1b1b;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f0f0f;--ink:#ececec;--ink-2:#8d8d8d;--rule:#262626;--tile:#1b1b1b;color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{background:var(--bg)}
+body{margin:0;color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.55}
+a{color:inherit}
+img{display:block;max-width:100%}
+:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+button.z{all:unset;cursor:zoom-in;display:block}
+
+/* side index */
+.mark{all:unset;position:fixed;z-index:6;top:calc(env(safe-area-inset-top,0px) + 18px);left:max(18px,env(safe-area-inset-left,0px));cursor:pointer;padding:8px 10px;background:var(--mark-bg,var(--bg));color:var(--mark-ink,var(--ink));font-weight:900;font-size:13px;letter-spacing:.08em;text-transform:uppercase;line-height:1.1;display:flex;align-items:center;gap:12px;transition:background .3s,color .3s}
+.mark i{display:inline-flex;flex-direction:column;gap:3px}.mark i::before,.mark i::after{content:"";width:16px;height:2px;background:currentColor}
+.edge{position:fixed;inset:0 auto 0 0;width:22px;z-index:5}
+aside{position:fixed;inset:0 auto 0 0;width:min(300px,86vw);z-index:8;background:var(--mark-bg,var(--bg));color:var(--mark-ink,var(--ink));padding:calc(env(safe-area-inset-top,0px) + 26px) 28px 36px max(28px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:44px;transform:translateX(-102%);transition:transform .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s;visibility:hidden}
+aside.open{transform:none;box-shadow:0 0 60px rgba(0,0,0,.18);visibility:visible}
+aside .me{font-weight:900;font-size:13px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;line-height:1.1;padding:8px 0}
+aside nav{display:flex;flex-direction:column;gap:6px}
+aside nav a{text-decoration:none;font-weight:700;font-size:26px;letter-spacing:-.01em;line-height:1.15;color:var(--mark-ink,var(--ink));transition:opacity .15s,transform .2s}
+aside nav a:hover,aside nav a.on{color:var(--mark-ink,var(--ink))}
+aside nav a{opacity:.55}aside nav a:hover,aside nav a.on{opacity:1}
+aside nav a:hover{transform:translateX(6px)}
+aside nav a.on::before{content:"";display:inline-block;width:18px;height:3px;background:currentColor;vertical-align:middle;margin-right:10px}
+.scrim{position:fixed;inset:0;z-index:7;background:rgba(0,0,0,.12);opacity:0;pointer-events:none;transition:opacity .3s}
+.scrim.on{opacity:1;pointer-events:auto}
+body[data-v="secret-art-gallery"]{--mark-bg:var(--yellow);--mark-ink:var(--black);background:var(--yellow)}
+body[data-v="emmeline"]{--mark-bg:#efe7da;--mark-ink:var(--sepia);background:var(--cream)}
+main{min-width:0}
+.view{min-height:100vh}
+.pad{padding-left:48px;padding-right:max(48px,env(safe-area-inset-right,0px))}
+.head{padding-top:calc(env(safe-area-inset-top,0px) + 96px);padding-bottom:40px}
+.head h1{font-weight:900;font-size:clamp(30px,4.2vw,58px);line-height:.95;letter-spacing:-.02em;text-transform:uppercase;margin:0 0 10px}
+.head p{margin:0;font-weight:500;color:var(--ink-2)}
+
+/* HOME */
+.home{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);min-height:100vh}
+.home .txt{display:flex;flex-direction:column;justify-content:flex-end;padding:calc(env(safe-area-inset-top,0px) + 36px) 48px 56px}
+.home h1{font-weight:900;font-size:clamp(48px,8vw,124px);line-height:.86;letter-spacing:-.035em;text-transform:uppercase;margin:0 0 24px}
+.home p{margin:0;font-size:16px;font-weight:500}
+.home .pic{background:var(--tile)}
+.home .pic img{width:100%;height:100%;object-fit:cover;filter:grayscale(1)}
+
+/* BOARDS (Zara, Age Revolution) */
+.boards{display:flex;flex-direction:column;gap:28px;padding-bottom:96px}
+.boards img{width:100%;height:auto;background:var(--tile)}
+
+/* NINA — shop */
+.nina .intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;padding-bottom:48px;max-width:1100px}
+.nina .intro p{margin:0;font-size:16px;line-height:1.6}
+.shop{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;background:#fff}
+.card{background:#fff;color:#121212;display:flex;flex-direction:column;min-width:0}
+.car{position:relative}
+.track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;scroll-behavior:smooth}
+.track::-webkit-scrollbar{display:none}
+.track button{all:unset;flex:0 0 100%;scroll-snap-align:start;cursor:zoom-in;aspect-ratio:3/4;background:#fff}
+.track img{width:100%;height:100%;object-fit:contain}
+.arw{all:unset;cursor:pointer;position:absolute;top:50%;translate:0 -50%;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.9);color:#121212;font-size:20px;box-shadow:0 2px 14px rgba(0,0,0,.12);opacity:.0;transition:opacity .25s}
+.arw.l{left:14px}.arw.r{right:14px}
+.card:hover .arw,.arw:focus-visible{opacity:1}
+@media (hover:none){.arw{opacity:1}}
+.dots{position:absolute;left:0;right:0;bottom:12px;display:flex;justify-content:center;gap:5px;pointer-events:none}
+.dots span{width:5px;height:5px;border-radius:50%;background:#121212;opacity:.18;transition:opacity .2s}
+.dots span.on{opacity:.8}
+.card .meta{display:flex;justify-content:space-between;gap:12px;padding:16px 24px 28px}
+.card .meta b{font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.card .meta span{color:#7b7b7b;font-variant-numeric:tabular-nums}
+.how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:48px;padding-top:56px;padding-bottom:96px}
+.how h3{margin:0 0 8px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.how p{margin:0;color:var(--ink-2);max-width:34ch}
+.views{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px;background:var(--rule);margin-top:2px}
+.views button{all:unset;cursor:zoom-in;background:#fff;display:flex;align-items:center;justify-content:center;padding:24px}
+
+/* RICORRROBE — story */
+.story .lead{max-width:640px;font-size:17px;line-height:1.6;margin:0 0 24px}
+.chapter{display:grid;grid-template-columns:minmax(200px,0.32fr) minmax(0,1fr);gap:48px;padding-block:64px;border-top:1px solid var(--rule)}
+.chapter .cap{position:sticky;top:36px;align-self:start}
+.chapter .flow{--rh:270px}
+.chapter .flow.line{flex-wrap:nowrap}
+.flow.line::after{display:none}
+.flow.line button{flex-grow:0}
+.chapter .cap small{display:block;font-weight:700;color:var(--ink-2);margin-bottom:8px;font-variant-numeric:tabular-nums}
+.chapter .cap h2{margin:0 0 10px;font-weight:900;font-size:24px;line-height:1.05;text-transform:uppercase;letter-spacing:-.01em}
+.chapter .cap p{margin:0;color:var(--ink-2);max-width:36ch}
+.flow{display:flex;flex-wrap:wrap;gap:14px}
+.flow::after{content:"";flex-grow:999}
+.flow button{flex:var(--r) 1 calc(var(--r) * var(--rh,300px));min-width:0}
+.flow button img{width:100%!important;height:auto!important}
+.flow button img{height:auto;background:var(--tile)}
+.flow .xl img{height:min(70vh,560px);width:auto}
+.flow .l img{height:min(52vh,420px);width:auto}
+.flow .m img{height:min(40vh,320px);width:auto}
+.flow .s img{height:min(30vh,240px);width:auto}
+.chapter.end{padding-bottom:120px}
+
+/* SECRET ART GALLERY — street */
+.sag{background:var(--yellow);color:var(--black)}
+.sag .top{display:grid;grid-template-columns:auto minmax(0,1fr);gap:40px;align-items:center;padding:calc(env(safe-area-inset-top,0px) + 96px) 48px 40px}
+.sag .logo{mix-blend-mode:multiply;width:clamp(140px,16vw,240px);transform:rotate(-8deg);transition:transform .6s}
+.sag .logo:hover{transform:rotate(8deg)}
+.sag h1{font-family:var(--poster);font-weight:400;font-size:clamp(56px,10vw,170px);line-height:.86;text-transform:uppercase;margin:0;letter-spacing:.005em}
+.sag .sub{font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-top:14px}
+.tape{display:inline-block;background:var(--black);color:var(--yellow);font-family:var(--poster);font-size:clamp(22px,2.6vw,36px);text-transform:uppercase;padding:6px 16px 4px;transform:rotate(-2deg);margin:0 0 0 48px}
+.tape.r{transform:rotate(1.5deg)}
+.bleed3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin-top:22px}
+.bleed3 button{height:min(92vh,880px)}
+.bleed3 img,.wall2 img{width:100%;height:100%;object-fit:cover}
+.sag .note{padding:22px 48px 64px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;max-width:900px}
+.wall2{display:grid;grid-template-columns:1.1fr 1fr 1fr;grid-template-rows:repeat(2,min(46vh,440px));gap:0;margin-top:22px;padding-bottom:0}
+.wall2 button{overflow:hidden}
+.wall2 .tall{grid-row:1/3}
+.sag .foot{padding:40px 48px 80px;font-family:var(--poster);font-size:clamp(28px,4vw,56px);text-transform:uppercase;line-height:.95}
+
+/* EMMELINE — romantic */
+.emm{background:var(--cream);color:var(--sepia)}
+.emm .opening{position:relative}
+.emm .opening img{width:100%;height:min(78vh,720px);object-fit:cover;filter:sepia(.25) saturate(.85)}
+.emm .opening .t{position:absolute;left:48px;bottom:40px;color:#f6efe4}
+.emm h1{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(56px,9vw,150px);line-height:.85;margin:0}
+.emm .opening .t p{font-family:var(--serif);font-size:20px;margin:10px 0 0}
+.emm .lead{font-family:var(--serif);font-size:clamp(20px,1.8vw,26px);line-height:1.4;max-width:760px;padding:72px 48px 24px;margin:0 auto;text-align:center}
+.scene{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-auto-rows:56px;padding:56px 48px;max-width:1400px;margin:0 auto}
+.scene button{position:relative;z-index:1;overflow:hidden;box-shadow:0 18px 40px -22px rgba(60,40,20,.45)}
+.scene img{width:100%;height:100%;object-fit:cover;filter:sepia(.18) saturate(.9)}
+.scene h2{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(34px,3.6vw,54px);line-height:1;margin:0;padding:0 0 30px;z-index:2;align-self:end}
+.scene .q{font-family:var(--serif);font-style:italic;font-size:22px;line-height:1.3;z-index:2;align-self:center;margin:0;padding:0 0 0 36px}
+.scene h2.after{align-self:start;padding:34px 0 0 36px}
+.emm .bye{font-family:var(--serif);font-style:italic;text-align:center;font-size:24px;padding:24px 48px 120px;color:var(--sepia-2)}
+
+/* CONTACT */
+.contact{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);min-height:100vh}
+.contact .pic img{width:100%;height:100%;object-fit:cover}
+.contact .txt{padding:calc(env(safe-area-inset-top,0px) + 96px) 56px 56px;display:flex;flex-direction:column;justify-content:space-between;gap:48px}
+.contact h1{font-weight:900;font-size:clamp(40px,5.6vw,92px);line-height:.86;letter-spacing:-.035em;text-transform:uppercase;margin:0}
+.contact .mail{font-size:clamp(20px,2.4vw,34px);font-weight:500;overflow-wrap:anywhere;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
+.contact dl{display:grid;grid-template-columns:120px minmax(0,1fr);gap:12px 16px;margin:28px 0 0;font-size:15px}
+.contact dt{color:var(--ink-2)}
+.contact dd{margin:0;overflow-wrap:anywhere}
+.contact dd a{text-decoration:underline;text-underline-offset:3px}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:20;background:rgba(10,10,10,.94);color:#f2f2f2;display:grid;grid-template-rows:auto minmax(0,1fr);padding:calc(env(safe-area-inset-top,0px) + 18px) max(24px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 24px) max(24px,env(safe-area-inset-left,0px))}
+.lb .bar{display:flex;justify-content:space-between;gap:12px;padding-bottom:14px;font-weight:500}
+.lb .stage{position:relative;display:flex;align-items:center;justify-content:center;min-height:0}
+.lb img{max-width:100%;max-height:100%;object-fit:contain}
+.lb button{all:unset;cursor:pointer}
+.lb .prev,.lb .next{position:absolute;top:0;bottom:0;width:35%;display:flex;align-items:center;padding:0 6px}
+.lb .prev{left:0}.lb .next{right:0;justify-content:flex-end}
+
+@media (max-width:900px){
+  .mark{top:calc(env(safe-area-inset-top,0px) + 10px);left:max(8px,env(safe-area-inset-left,0px))}
+  .edge{display:none}
+  .head,.sag .top{padding-top:calc(env(safe-area-inset-top,0px) + 72px)}
+  .pad,.sag .top,.sag .note,.sag .foot,.emm .lead,.scene{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  .home,.contact,.nina .intro,.chapter{grid-template-columns:minmax(0,1fr)}
+  .home .pic{height:60vh;order:-1}
+  .home .txt{padding:28px 16px 40px}
+  .contact .pic{height:55vh}
+  .contact .txt{padding:28px 16px 48px}
+  .shop,.how{grid-template-columns:minmax(0,1fr)}
+  .how{gap:24px}
+  .chapter{gap:20px;padding-block:40px}
+  .chapter .cap{position:static}
+  .chapter .flow{--rh:150px;gap:8px}
+  .bleed3{grid-template-columns:minmax(0,1fr)}
+  .bleed3 button{height:80vh}
+  .wall2{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:none;grid-auto-rows:260px}
+  .wall2 .tall{grid-row:span 2}
+  .sag .top{grid-template-columns:minmax(0,1fr);gap:20px}
+  .tape{margin-left:16px}
+  .emm .opening .t{left:16px;bottom:24px}
+  .scene{display:flex;flex-direction:column;gap:14px;padding-block:40px}
+  .scene button{height:auto!important}
+  .scene img{height:auto}
+  .scene h2,.scene h2.after,.scene .q{padding:8px 0}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head><body>
+
+<button class="mark" id="mark" type="button" aria-controls="idx" aria-expanded="false"><i aria-hidden="true"></i>Helena Cáceres</button>
+<div class="edge" id="edge" aria-hidden="true"></div>
+<div class="scrim" id="scrim"></div>
+<aside id="idx">
+  <a class="me" href="#home">Helena Cáceres</a>
+  <nav aria-label="Collections">
+    <a href="#zara">Zara Woman</a>
+    <a href="#ricorrrobe">Ricorrrobe</a>
+    <a href="#secret-art-gallery">Secret Art Gallery</a>
+    <a href="#nina-skarra">Nina Skarra</a>
+    <a href="#emmeline">Emmeline</a>
+    <a href="#age-revolution">Age Revolution</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</aside>
+
+<main>
+
+<section class="view" data-view="home">
+  <div class="home">
+    <div class="txt">
+      <h1>Helena<br>Cáceres</h1>
+      <p>Design Developer · Pattern Maker · Fashion Designer</p>
+    </div>
+    <div class="pic"><img src="a/p18-01.jpg" alt="Ricorrrobe pieces in a field" style="filter:none"></div>
+  </div>
+</section>
+
+<section class="view" data-view="zara" hidden>
+  <div class="pad head"><h1>Zara Woman</h1><p>Pattern Maker · 2023 – present</p></div>
+  <div class="pad boards">
+    <img src="a/zara-2.jpg" width="1988" height="1406" alt="Zara Woman portfolio page 1" loading="lazy">
+    <img src="a/zara-3.jpg" width="1988" height="1406" alt="Zara Woman portfolio page 2" loading="lazy">
+    <img src="a/zara-4.jpg" width="1988" height="1406" alt="Zara Woman portfolio page 3" loading="lazy">
+    <img src="a/zara-5.jpg" width="1988" height="1406" alt="Zara Woman portfolio page 4" loading="lazy">
+    <img src="a/zara-6.jpg" width="1988" height="1406" alt="Zara Woman portfolio page 5" loading="lazy">
+    <img src="a/zara-7.jpg" width="1988" height="1406" alt="Zara Woman portfolio page 6" loading="lazy">
+    <img src="a/zara-8.jpg" width="1988" height="1406" alt="Zara Woman portfolio page 7" loading="lazy">
+    <img src="a/zara-9.jpg" width="1988" height="1406" alt="Zara Woman portfolio page 8" loading="lazy">
+  </div>
+</section>
+
+<section class="view story" data-view="ricorrrobe" hidden>
+  <div class="pad head"><h1>Ricorrrobe</h1><p>Pattern Maker / Assistant Designer · London · 2020 – 2023</p></div>
+  <div class="pad">
+    <p class="lead">I was the right hand of the creative director: new designs two seasons a year, drafted by hand, shown in Paris and produced in our small studio in London.</p>
+
+    <div class="chapter">
+      <div class="cap"><small>01</small><h2>On paper</h2><p>Every piece started as a sketch and a paper pattern, pleat by pleat.</p></div>
+      <div class="flow line" style="--rh:190px">
+        <button style="--r:1.120" class="z l" data-g="ric"><img src="a/p21-01.jpg" alt="Sketch of the Pleats Dress" loading="lazy"></button>
+        <button style="--r:1.732" class="z m" data-g="ric"><img src="a/p21-06.jpg" alt="Paper pattern pieces for the pleats" loading="lazy"></button>
+        <button style="--r:1.139" class="z m" data-g="ric"><img src="a/p21-13.jpg" alt="Pleated sleeve flares cut out" loading="lazy"></button>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="cap"><small>02</small><h2>On the stand</h2><p>Then the toile on the dress form, adjusted until the volume felt right.</p></div>
+      <div class="flow line" style="--rh:330px">
+        <button style="--r:0.490" class="z l" data-g="ric"><img src="a/p21-02.jpg" alt="Toile of the Pleats Dress on the stand" loading="lazy"></button>
+        <button style="--r:0.442" class="z l" data-g="ric"><img src="a/p21-03.jpg" alt="Toile on the stand, side view" loading="lazy"></button>
+        <button style="--r:0.482" class="z l" data-g="ric"><img src="a/p21-04.jpg" alt="Toile in calico, front" loading="lazy"></button>
+        <button style="--r:0.482" class="z l" data-g="ric"><img src="a/p21-05.jpg" alt="Toile in calico, back" loading="lazy"></button>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="cap"><small>03</small><h2>In 3D</h2><p>A check in CLO3D before cutting the final fabric.</p></div>
+      <div class="flow">
+        <button style="--r:0.540" class="z l" data-g="ric"><img src="a/p21-07.jpg" alt="Pleats Dress in CLO3D" loading="lazy"></button>
+        <button style="--r:0.595" class="z l" data-g="ric"><img src="a/p21-12.jpg" alt="CLO3D render of the Pleats Dress" loading="lazy"></button>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="cap"><small>04</small><h2>The samples</h2><p>Pleats Dress, A Dress and H Dress, made in our studio.</p></div>
+      <div class="flow">
+        <button style="--r:0.369" class="z xl" data-g="ric"><img src="a/p21-08.jpg" alt="Pleats Dress sample, front" loading="lazy"></button>
+        <button style="--r:0.312" class="z l" data-g="ric"><img src="a/p21-09.jpg" alt="Pleats Dress sample, side" loading="lazy"></button>
+        <button style="--r:0.369" class="z l" data-g="ric"><img src="a/p21-10.jpg" alt="Pleats Dress sample, back" loading="lazy"></button>
+        <button style="--r:0.409" class="z l" data-g="ric"><img src="a/p20-01.jpg" alt="A Dress sample, front" loading="lazy"></button>
+        <button style="--r:0.409" class="z l" data-g="ric"><img src="a/p20-03.jpg" alt="A Dress sample, back" loading="lazy"></button>
+        <button style="--r:0.924" class="z m" data-g="ric"><img src="a/p19-02.jpg" alt="H Dress laid flat" loading="lazy"></button>
+        <button style="--r:0.973" class="z m" data-g="ric"><img src="a/p19-04.jpg" alt="H Dress laid flat, back" loading="lazy"></button>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="cap"><small>05</small><h2>Worn</h2><p>Out of the studio and into real life.</p></div>
+      <div class="flow">
+        <button style="--r:1.332" class="z xl" data-g="ric"><img src="a/p18-01.jpg" alt="Ricorrrobe pieces worn in a field" loading="lazy"></button>
+        <button style="--r:1.366" class="z l" data-g="ric"><img src="a/p19-03.jpg" alt="H Dress worn at home" loading="lazy"></button>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="cap"><small>06</small><h2>Paris</h2><p>Every season I directed our showroom in Paris during Fashion Week.</p></div>
+      <div class="flow">
+        <button style="--r:0.669" class="z xl" data-g="ric"><img src="a/p22-02.jpg" alt="Cio Skirt in Paris, detail" loading="lazy"></button>
+        <button style="--r:0.749" class="z l" data-g="ric"><img src="a/p22-01.jpg" alt="Cio Skirt worn on a street in Paris" loading="lazy"></button>
+      </div>
+    </div>
+
+    <div class="chapter end">
+      <div class="cap"><small>07</small><h2>In the shops</h2><p>Buyers chose each piece in the colour and fabric they wanted, and every shop styled our designs in its own way.</p></div>
+      <div class="flow">
+        <button style="--r:2.168" class="z xl" data-g="ric"><img src="a/p19-06.jpg" alt="H Dress on a shop's website" loading="lazy"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="view nina" data-view="nina-skarra" hidden>
+  <div class="pad head"><h1>Nina Skarra</h1><p>Digital Pattern Maker · Remote · 2022 – 2023</p></div>
+  <div class="pad intro">
+    <p>Nina Skarra is a luxury fashion designer from Oslo. Her pieces were sold online from 3D renders, before a single one was sewn.</p>
+    <p>I built each garment in CLO3D and created the renders for the online shop. Once the orders were in, I drafted the production patterns and the pieces were made in London, only in the quantities sold.</p>
+  </div>
+  <div class="shop">
+    <div class="card" data-p="demi-dress"><div class="car"><div class="track"></div><button class="arw l" type="button" aria-label="Previous view of Demi Dress">&#8249;</button><button class="arw r" type="button" aria-label="Next view of Demi Dress">&#8250;</button><div class="dots"></div></div><div class="meta"><b>Demi Dress</b><span class="cnt">1 / 14</span></div></div>
+    <div class="card" data-p="diana-dress"><div class="car"><div class="track"></div><button class="arw l" type="button" aria-label="Previous view of Diana Dress">&#8249;</button><button class="arw r" type="button" aria-label="Next view of Diana Dress">&#8250;</button><div class="dots"></div></div><div class="meta"><b>Diana Dress</b><span class="cnt">1 / 10</span></div></div>
+    <div class="card" data-p="diana-top"><div class="car"><div class="track"></div><button class="arw l" type="button" aria-label="Previous view of Diana Top">&#8249;</button><button class="arw r" type="button" aria-label="Next view of Diana Top">&#8250;</button><div class="dots"></div></div><div class="meta"><b>Diana Top</b><span class="cnt">1 / 10</span></div></div>
+  </div>
+  <div class="pad how">
+    <div><h3>1 · Built in 3D</h3><p>Each style patterned and sewn virtually in CLO3D.</p></div>
+    <div><h3>2 · Sold online</h3><p>The renders went straight to the shop for pre-orders.</p></div>
+    <div><h3>3 · Made in London</h3><p>Production patterns drafted once the quantities were known.</p></div>
+  </div>
+</section>
+
+<section class="view sag" data-view="secret-art-gallery" hidden>
+  <div class="top">
+    <img class="logo" src="a/sag-logo.jpg" alt="Secret Art Gallery logo: an eye inside a yellow circle">
+    <div>
+      <h1>Secret Art<br>Gallery</h1>
+      <div class="sub">Costume Maker · Secret Art London · 2022</div>
+    </div>
+  </div>
+  <span class="tape">The Queen Dress</span>
+  <div class="bleed3">
+    <button class="z" data-g="sag"><img src="a/p31-01.jpg" alt="The Queen Dress, front" loading="lazy"></button>
+    <button class="z" data-g="sag"><img src="a/p31-02.jpg" alt="The Queen Dress, waving" loading="lazy"></button>
+    <button class="z" data-g="sag"><img src="a/p31-03.jpg" alt="The Queen Dress at the tea table" loading="lazy"></button>
+  </div>
+  <p class="note">Immersive experience for the Jubilee weekend in London. Costumes for the gallery's immersive experiences.</p>
+  <span class="tape r">Made by hand</span>
+  <div class="wall2">
+    <button class="z tall" data-g="sag"><img src="a/p32-01.jpg" alt="Full-body costume of stitched panels, hanging" loading="lazy"></button>
+    <button class="z" data-g="sag"><img src="a/p32-03.jpg" alt="Panels laid out before stitching" loading="lazy"></button>
+    <button class="z" data-g="sag"><img src="a/p32-02.jpg" alt="Raw panels" loading="lazy"></button>
+    <button class="z" data-g="sag"><img src="a/p32-05.jpg" alt="Work in progress on the floor" loading="lazy"></button>
+    <button class="z" data-g="sag"><img src="a/p32-07.jpg" alt="Stitch detail" loading="lazy"></button>
+  </div>
+  <div class="foot">XXVIII Cheshire Street · London</div>
+</section>
+
+<section class="view emm" data-view="emmeline" hidden>
+  <div class="opening">
+    <img src="a/p12-01.jpg" alt="On stage before the suffragette banner">
+    <div class="t"><h1>Emmeline</h1><p>Costume Assistant · The Cockpit Theatre · London · 2021</p></div>
+  </div>
+  <p class="lead">A play about the suffragette movement, written by Beatrice Hyde and produced by The Theatre Lab Company. I was the costume designer's right hand, cutting the patterns and sewing the costumes.</p>
+
+  <div class="scene">
+    <h2 style="grid-column:1/6;grid-row:1/3">Women in prison</h2>
+    <button class="z" data-g="emm" style="grid-column:1/4;grid-row:3/11"><img src="a/p13-01.jpg" alt="Paper toile of a prison dress" loading="lazy"></button>
+    <button class="z" data-g="emm" style="grid-column:3/7;grid-row:6/15"><img src="a/p13-04.jpg" alt="Finished prison dress and apron" loading="lazy"></button>
+    <button class="z" data-g="emm" style="grid-column:7/13;grid-row:2/13"><img src="a/p13-03.jpg" alt="Women in prison on stage" loading="lazy"></button>
+  </div>
+
+  <div class="scene">
+    <button class="z" data-g="emm" style="grid-column:1/4;grid-row:1/11"><img src="a/p14-04.jpg" alt="Illustration of Sylvia's costume" loading="lazy"></button>
+    <button class="z" data-g="emm" style="grid-column:4/7;grid-row:3/12"><img src="a/p14-01.jpg" alt="Sylvia paper toile" loading="lazy"></button>
+    <button class="z" data-g="emm" style="grid-column:6/9;grid-row:6/16"><img src="a/p14-05.jpg" alt="Sylvia's finished green coat" loading="lazy"></button>
+    <button class="z" data-g="emm" style="grid-column:9/13;grid-row:1/9"><img src="a/p14-03.jpg" alt="Sylvia on stage with the banner" loading="lazy"></button>
+    <h2 class="after" style="grid-column:9/13;grid-row:9/13">Sylvia</h2>
+  </div>
+
+  <div class="scene">
+    <h2 style="grid-column:1/5;grid-row:1/3">Emmeline</h2>
+    <button class="z" data-g="emm" style="grid-column:1/4;grid-row:3/12"><img src="a/p15-01.jpg" alt="Emmeline paper toile" loading="lazy"></button>
+    <button class="z" data-g="emm" style="grid-column:3/6;grid-row:7/16"><img src="a/p15-04.jpg" alt="Emmeline's finished satin coat dress" loading="lazy"></button>
+    <button class="z" data-g="emm" style="grid-column:7/13;grid-row:1/14"><img src="a/p15-03.jpg" alt="Emmeline backstage in costume" loading="lazy"></button>
+  </div>
+
+  <div class="scene">
+    <button class="z" data-g="emm" style="grid-column:1/4;grid-row:1/13"><img src="a/p16-01.jpg" alt="Sketch of the white dress" loading="lazy"></button>
+    <button class="z" data-g="emm" style="grid-column:4/8;grid-row:3/15"><img src="a/p16-03.jpg" alt="White lace dress on the stand" loading="lazy"></button>
+    <button class="z" data-g="emm" style="grid-column:8/12;grid-row:1/11"><img src="a/p16-02.jpg" alt="The girl on stage holding a 1910 sign" loading="lazy"></button>
+    <p class="q" style="grid-column:8/13;grid-row:12/15">The girl that dreams of going back in time, wondering if she could have helped fight for the women's vote.</p>
+  </div>
+
+  <div class="scene">
+    <h2 style="grid-column:1/7;grid-row:1/3">Working women, cellists, intimewear, Christabell</h2>
+    <button class="z" data-g="emm" style="grid-column:1/4;grid-row:3/12"><img src="a/p17-01.jpg" alt="Working women's white dress" loading="lazy"></button>
+    <button class="z" data-g="emm" style="grid-column:4/7;grid-row:5/14"><img src="a/p17-03.jpg" alt="Cellists' black dress" loading="lazy"></button>
+    <button class="z" data-g="emm" style="grid-column:7/10;grid-row:3/12"><img src="a/p17-07.jpg" alt="Christabell's skirt with bow" loading="lazy"></button>
+    <button class="z" data-g="emm" style="grid-column:10/13;grid-row:6/12"><img src="a/p17-05.jpg" alt="Intimewear: bloomers" loading="lazy"></button>
+  </div>
+</section>
+
+<section class="view" data-view="age-revolution" hidden>
+  <div class="pad head"><h1>Age Revolution</h1><p>BA Final Collection · LCI Barcelona · 2020</p></div>
+  <div class="pad boards">
+    <img src="a/age-2.jpg" width="1988" height="1406" alt="Age Revolution introduction" loading="lazy">
+    <img src="a/age-3.jpg" width="1988" height="1406" alt="Age Revolution look 1" loading="lazy">
+    <img src="a/age-4.jpg" width="1988" height="1406" alt="Age Revolution look 2" loading="lazy">
+    <img src="a/age-5.jpg" width="1988" height="1406" alt="Age Revolution look 3" loading="lazy">
+    <img src="a/age-6.jpg" width="1988" height="1406" alt="Age Revolution look 4" loading="lazy">
+    <img src="a/age-7.jpg" width="1988" height="1406" alt="Age Revolution look 5" loading="lazy">
+    <img src="a/age-8.jpg" width="1988" height="1406" alt="Age Revolution look 6" loading="lazy">
+    <img src="a/age-9.jpg" width="1988" height="1406" alt="Age Revolution look 7" loading="lazy">
+    <img src="a/age-10.jpg" width="1988" height="1406" alt="Age Revolution look 8" loading="lazy">
+  </div>
+</section>
+
+<section class="view" data-view="contact" hidden>
+  <div class="contact">
+    <div class="pic"><img src="a/portrait.jpg" alt="Portrait of Helena Cáceres"></div>
+    <div class="txt">
+      <h1>From the first sketch<br>to the last stitch.</h1>
+      <div>
+        <span class="mail">helena.caceres97@gmail.com</span>
+        <dl>
+          <dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/helena-c%C3%A1ceres-mu%C3%B1oz-451b12129/" target="_blank" rel="noopener">Helena Cáceres Muñoz</a></dd>
+          <dt>CV</dt><dd><a href="Helena_Caceres_CV.pdf" target="_blank" rel="noopener">Download PDF</a></dd>
+          <dt>Languages</dt><dd>Spanish, Catalan, English<br><span style="color:var(--ink-2);font-size:13px">Basic: Italian, French, Japanese</span></dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Image viewer">
+  <div class="bar"><span id="lbcap"></span><button id="lbclose" type="button">Close</button></div>
+  <div class="stage">
+    <img id="lbimg" alt="">
+    <div class="prev"><button id="lbprev" type="button" aria-label="Previous image">←</button></div>
+    <div class="next"><button id="lbnext" type="button" aria-label="Next image">→</button></div>
+  </div>
+</div>
+
+<script>
+const views=[...document.querySelectorAll('.view')], links=[...document.querySelectorAll('aside nav a')];
+function route(){
+  const id=(location.hash||'#home').slice(1);
+  const v=views.find(x=>x.dataset.view===id)||views[0];
+  views.forEach(x=>x.hidden=x!==v);
+  links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+v.dataset.view));
+  window.scrollTo(0,0);
+  document.body.dataset.v=v.dataset.view;
+  setIdx(false);
+}
+const idxEl=document.getElementById('idx'),mark=document.getElementById('mark'),scrim=document.getElementById('scrim');
+function setIdx(o){idxEl.classList.toggle('open',o);scrim.classList.toggle('on',o);mark.setAttribute('aria-expanded',o);idxEl.inert=!o;}
+mark.addEventListener('click',()=>setIdx(!idxEl.classList.contains('open')));
+document.getElementById('edge').addEventListener('mousemove',()=>setIdx(true));
+mark.addEventListener('mouseenter',()=>{if(matchMedia('(hover:hover)').matches)setIdx(true)});
+idxEl.addEventListener('mouseleave',()=>setIdx(false));
+scrim.addEventListener('click',()=>setIdx(false));
+addEventListener('keydown',e=>{if(e.key==='Escape'&&idxEl.classList.contains('open'))setIdx(false)});
+addEventListener('hashchange',route); route();
+
+const lb=document.getElementById('lb'),lbimg=document.getElementById('lbimg'),lbcap=document.getElementById('lbcap');
+let set=[],cur=0,last=null;
+function show(i){cur=(i+set.length)%set.length;lbimg.src=set[cur].src;lbimg.alt=set[cur].alt;lbcap.textContent=set[cur].alt+'  ·  '+(cur+1)+' / '+set.length;}
+function open(list,i){set=list;last=document.activeElement;show(i);lb.hidden=false;document.body.style.overflow='hidden';document.getElementById('lbclose').focus();}
+function close(){lb.hidden=true;document.body.style.overflow='';last&&last.focus();}
+document.getElementById('lbclose').onclick=close;
+document.getElementById('lbprev').onclick=()=>show(cur-1);
+document.getElementById('lbnext').onclick=()=>show(cur+1);
+addEventListener('keydown',e=>{if(lb.hidden)return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')show(cur-1);if(e.key==='ArrowRight')show(cur+1);});
+document.querySelectorAll('button.z').forEach(b=>b.addEventListener('click',()=>{
+  const g=[...document.querySelectorAll('button.z[data-g="'+b.dataset.g+'"] img')].map(i=>({src:i.src,alt:i.alt}));
+  open(g,[...document.querySelectorAll('button.z[data-g="'+b.dataset.g+'"]')].indexOf(b));
+}));
+const NAMES={"demi-dress": "Demi Dress", "diana-dress": "Diana Dress", "diana-top": "Diana Top"}, NINA={"demi-dress": ["n/demi-dress-01.jpg", "n/demi-dress-02.jpg", "n/demi-dress-03.jpg", "n/demi-dress-04.jpg", "n/demi-dress-05.jpg", "n/demi-dress-06.jpg", "n/demi-dress-07.jpg", "n/demi-dress-08.jpg", "n/demi-dress-09.jpg", "n/demi-dress-10.jpg", "n/demi-dress-11.jpg", "n/demi-dress-12.jpg", "n/demi-dress-13.jpg", "n/demi-dress-14.jpg"], "diana-dress": ["n/diana-dress-01.jpg", "n/diana-dress-02.jpg", "n/diana-dress-03.jpg", "n/diana-dress-04.jpg", "n/diana-dress-05.jpg", "n/diana-dress-06.jpg", "n/diana-dress-08.jpg", "n/diana-dress-09.jpg", "n/diana-dress-10.jpg", "n/diana-dress-11.jpg"], "diana-top": ["n/diana-top-01.jpg", "n/diana-top-02.jpg", "n/diana-top-03.jpg", "n/diana-top-04.jpg", "n/diana-top-05.jpg", "n/diana-top-07.jpg", "n/diana-top-09.jpg", "n/diana-top-10.jpg", "n/diana-top-11.jpg", "n/diana-top-12.jpg"]};
+document.querySelectorAll('.card[data-p]').forEach(c=>{
+  const p=c.dataset.p,n=NAMES[p],list=NINA[p].map((src,i)=>({src,alt:n+' · view '+(i+1)}));
+  const tr=c.querySelector('.track'),dots=c.querySelector('.dots'),cnt=c.querySelector('.cnt');
+  list.forEach((it,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Enlarge '+it.alt);
+    const im=new Image();im.src=it.src;im.alt=it.alt;if(i)im.loading='lazy';b.append(im);b.onclick=()=>open(list,i);tr.append(b);
+    dots.append(document.createElement('span'));});
+  const idx=()=>Math.round(tr.scrollLeft/tr.clientWidth);
+  const upd=()=>{const i=idx();cnt.textContent=(i+1)+' / '+list.length;[...dots.children].forEach((d,j)=>d.classList.toggle('on',j===i));};
+  tr.addEventListener('scroll',()=>requestAnimationFrame(upd));upd();
+  const go=d=>{const i=(idx()+d+list.length)%list.length;tr.scrollTo({left:i*tr.clientWidth});};
+  c.querySelector('.arw.l').onclick=()=>go(-1);c.querySelector('.arw.r').onclick=()=>go(1);
+});
+</script>
+</body></html>
